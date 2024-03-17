@@ -13,10 +13,10 @@ export async function POST(request) {
 }
 
 const getTokenbalance = async (address) => {
-  const connection = new web3.Connection("https://api.devnet.solana.com");
+  let connection = new web3.Connection(web3.clusterApiUrl("devnet"));
 
   const tokenAccounts = await connection.getTokenAccountsByOwner(
-    new web3.PublicKey("8YLKoCu7NwqHNS8GzuvA2ibsvLrsg22YMfMDafxh1B15"),
+    new web3.PublicKey(address),
     {
       programId: TOKEN_PROGRAM_ID,
     }
