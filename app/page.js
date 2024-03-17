@@ -18,7 +18,7 @@ export default function Home() {
 
           await api
             .crud("POST", "getbhoomibalance", {
-              address: provider.publicKey.toBase58(),
+              address: "eEjz2hdrxnxixAy2o1PFMGDB9oyn4WxF3ECTAQPdNDA",
             })
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
