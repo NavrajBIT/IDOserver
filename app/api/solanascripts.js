@@ -18,6 +18,7 @@ import {
   getOrCreateAssociatedTokenAccount,
   createTransferInstruction,
 } from "@solana/spl-token";
+import base58 from "bs58";
 
 export const getTokenbalance = async (address) => {
   const BHOOMI_ADDRESS = process.env.NEXT_BHOOMI_ADDRESS;
