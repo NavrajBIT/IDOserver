@@ -28,8 +28,7 @@ import base58 from "bs58";
 
 async function metadata() {
   console.log("Adding metadata...");
-  const payerPrivateKey =
-    "55PwjYGjRwvXBL7X9ccaewbvwTkRyu9RB6cTjk7t5afCGuyEmfVUQCVZAtQQRSncQw3J765UzGpwrw76CGJepKnb";
+  const payerPrivateKey = "";
   const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
   const myKeypair = web3.Keypair.fromSecretKey(payerPrivateKeydecoded);
   const mint = new web3.PublicKey(

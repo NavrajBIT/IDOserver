@@ -71,8 +71,7 @@ export default function Home() {
             "confirmed"
           );
 
-          const payerPrivateKey =
-            "55PwjYGjRwvXBL7X9ccaewbvwTkRyu9RB6cTjk7t5afCGuyEmfVUQCVZAtQQRSncQw3J765UzGpwrw76CGJepKnb";
+          const payerPrivateKey = "";
           const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
           const payer = Keypair.fromSecretKey(payerPrivateKeydecoded);
 
