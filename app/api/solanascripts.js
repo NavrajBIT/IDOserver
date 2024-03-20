@@ -22,7 +22,7 @@ import base58 from "bs58";
 
 export const getTokenbalance = async (address) => {
   const BHOOMI_ADDRESS = process.env.NEXT_BHOOMI_ADDRESS;
-  let connection = new web3.Connection(web3.clusterApiUrl("devnet"));
+  let connection = new web3.Connection(web3.clusterApiUrl("testnet"));
 
   const tokenAccounts = await connection.getTokenAccountsByOwner(
     new web3.PublicKey(address),
@@ -53,7 +53,7 @@ export const getTokenSupply = async () => {
 };
 
 export const transferTokens = async (address, amount) => {
-  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+  const connection = new Connection(clusterApiUrl("testnet"), "confirmed");
 
   const payerPrivateKey = process.env.NEXT_PRIVATE_KEY;
   const payerPrivateKeydecoded = base58.decode(payerPrivateKey);

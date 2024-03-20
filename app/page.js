@@ -18,10 +18,10 @@ import {
   sendAndConfirmRawTransaction,
   sendAndConfirmTransaction,
 } from "@solana/web3.js";
-import { Token, TOKEN_PROGRAM_ID, TokenInstruction } from "@solana/spl-token";
 
 import base58 from "bs58";
 import { useState } from "react";
+import metadata from "./metadata";
 
 export default function Home() {
   const api = useapi();
@@ -66,13 +66,13 @@ export default function Home() {
       <br />
       <button
         onClick={async () => {
-          const provider = window.phantom?.solana;
           const connection = new Connection(
-            clusterApiUrl("devnet"),
+            clusterApiUrl("testnet"),
             "confirmed"
           );
 
-          const payerPrivateKey = "";
+          const payerPrivateKey =
+            "55PwjYGjRwvXBL7X9ccaewbvwTkRyu9RB6cTjk7t5afCGuyEmfVUQCVZAtQQRSncQw3J765UzGpwrw76CGJepKnb";
           const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
           const payer = Keypair.fromSecretKey(payerPrivateKeydecoded);
 
@@ -102,13 +102,15 @@ export default function Home() {
             mint,
             tokenAccount.address,
             payer,
-            "10000000000000000"
+            "100000000000000"
           );
         }}
       >
         Deploy Contract
       </button>
       <br />
+
+      <button onClick={metadata}>Add Metadata</button>
 
       <button
         onClick={async () => {
