@@ -5,8 +5,8 @@ export async function GET() {
   let currentAvailableToMint = await getTokenSupply();
 
   return NextResponse.json({
-    totalSupply: "100000",
-    totalAvailableToMint: "100000",
+    totalSupply: process.env.NEXT_TOTAL_SUPPLY,
+    totalAvailableToMint: process.env.NEXT_CURRENT_SUPPLY,
     currentAvailableToMint: currentAvailableToMint.toString(),
     address: process.env.NEXT_BHOOMI_ADDRESS,
   });
