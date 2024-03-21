@@ -101,7 +101,7 @@ export default function Home() {
             mint,
             tokenAccount.address,
             payer,
-            "100000000000000"
+            "5000000000000"
           );
         }}
       >

@@ -8,5 +8,6 @@ export async function GET() {
     totalSupply: "100000",
     totalAvailableToMint: "100000",
     currentAvailableToMint: currentAvailableToMint.toString(),
+    address: process.env.NEXT_BHOOMI_ADDRESS,
   });
 }
