@@ -100,3 +100,28 @@ export const transferTokens = async (address, amount) => {
   console.log(signature);
   return signature;
 };
+
+export const revertTx = async (address, sol) => {
+  const connection = new Connection(clusterApiUrl("testnet"), "confirmed");
+  console.log(`Sending ${sol} SOL`);
+  const payerPrivateKey = process.env.NEXT_PRIVATE_KEY;
+  const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
+  const senderKeypair = Keypair.fromSecretKey(payerPrivateKeydecoded);
+  console.log("1-----------------------------");
+
+  const transaction = new Transaction().add(
+    SystemProgram.transfer({
+      fromPubkey: senderKeypair.publicKey,
+      toPubkey: address,
+      lamports: sol * 10 ** 9, // Convert SOL to lamports (1 SOL = 10^9 lamports)
+    })
+  );
+
+  console.log("2-----------------------------");
+  const signature = await sendAndConfirmTransaction(connection, transaction, [
+    senderKeypair,
+  ]);
+
+  console.log("3-----------------------------");
+  console.log(signature);
+};
