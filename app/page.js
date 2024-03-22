@@ -67,8 +67,7 @@ export default function Home() {
       <button
         onClick={async () => {
           const connection = new Connection(
-            clusterApiUrl("testnet"),
-            "confirmed"
+            "https://api.mainnet-beta.solana.com"
           );
 
           const payerPrivateKey = "";
