@@ -11,8 +11,11 @@ export async function POST(request) {
   try {
     let signature = await transferTokens(address, amount);
     return NextResponse.json({ status: "success", signature: signature });
-  } catch {
+  } catch (err) {
+    console.log(err);
+
     revertTx(address, sol);
+
     return NextResponse.json({ status: "failed" });
   }
 }

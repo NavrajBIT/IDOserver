@@ -56,7 +56,7 @@ export const getTokenSupply = async () => {
 
 export const transferTokens = async (address, amount) => {
   const connection = new Connection(RPC);
-
+  console.log(RPC);
   const payerPrivateKey = process.env.NEXT_PRIVATE_KEY;
   const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
   const senderKeypair = Keypair.fromSecretKey(payerPrivateKeydecoded);
@@ -92,8 +92,11 @@ export const transferTokens = async (address, amount) => {
       amount * Math.pow(10, numberDecimals)
     )
   );
-
+  console.log(senderKeypair.publicKey);
   console.log("sending transaction---");
+
+  console.log(connection);
+  console.log(tx);
 
   const signature = await sendAndConfirmTransaction(connection, tx, [
     senderKeypair,
