@@ -92,7 +92,7 @@ export const transferTokens = async (address, amount) => {
       amount * Math.pow(10, numberDecimals)
     )
   );
-  console.log(senderKeypair.publicKey);
+  console.log(senderKeypair);
   console.log("sending transaction---");
 
   console.log(connection);
