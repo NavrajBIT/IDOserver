@@ -14,7 +14,7 @@ export async function POST(request) {
   } catch (err) {
     console.log(err);
 
-    revertTx(address, sol);
+    // revertTx(address, sol);
 
     return NextResponse.json({ status: "failed" });
   }

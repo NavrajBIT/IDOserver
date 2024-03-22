@@ -19,6 +19,7 @@ import {
   createTransferInstruction,
 } from "@solana/spl-token";
 import base58 from "bs58";
+const splToken = require("@solana/spl-token");
 
 const RPC = process.env.NEXT_RPC_URL;
 
@@ -83,7 +84,11 @@ export const transferTokens = async (address, amount) => {
 
   const numberDecimals = 9;
   console.log(`4 - Creating and Sending Transaction`);
-  const tx = new Transaction();
+
+  const latestBlockhash = await connection.getLatestBlockhash(commitment);
+  console.log(`latest block hash ${latestBlockhash}`);
+
+  const tx = new Transaction(latestBlockhash);
   tx.add(
     createTransferInstruction(
       sourceAccount.address,
