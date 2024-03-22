@@ -56,7 +56,8 @@ export const getTokenSupply = async () => {
 };
 
 export const transferTokens = async (address, amount) => {
-  const connection = new Connection(RPC);
+  const commitment = "confirmed";
+  const connection = new Connection(RPC, commitment);
   console.log(RPC);
   const payerPrivateKey = process.env.NEXT_PRIVATE_KEY;
   const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
