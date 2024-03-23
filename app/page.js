@@ -66,14 +66,15 @@ export default function Home() {
       <br />
       <button
         onClick={async () => {
-          const connection = new Connection(
-            "https://api.mainnet-beta.solana.com"
-          );
+          const connection = new Connection("https://api.devnet.solana.com");
+
+          console.log("deploying...");
 
           const payerPrivateKey = "";
           const payerPrivateKeydecoded = base58.decode(payerPrivateKey);
           const payer = Keypair.fromSecretKey(payerPrivateKeydecoded);
 
+          console.log("1--------------------------");
           const mint = await createMint(
             connection,
             payer,

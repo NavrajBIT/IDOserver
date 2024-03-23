@@ -7,7 +7,7 @@ export async function GET() {
   return NextResponse.json({
     totalSupply: process.env.NEXT_TOTAL_SUPPLY,
     totalAvailableToMint: process.env.NEXT_CURRENT_SUPPLY,
-    currentAvailableToMint: currentAvailableToMint.toString(),
+    // currentAvailableToMint: currentAvailableToMint.toString(),
     address: process.env.NEXT_BHOOMI_ADDRESS,
   });
 }

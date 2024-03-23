@@ -9,6 +9,7 @@ import {
   Transaction,
   sendAndConfirmRawTransaction,
   sendAndConfirmTransaction,
+  ComputeBudgetProgram,
 } from "@solana/web3.js";
 import {
   AccountLayout,
@@ -17,9 +18,11 @@ import {
   mintTo,
   getOrCreateAssociatedTokenAccount,
   createTransferInstruction,
+  transfer,
 } from "@solana/spl-token";
 import base58 from "bs58";
-const splToken = require("@solana/spl-token");
+const spl = require("@solana/spl-token");
+import { mintTokens } from "./mint";
 
 const RPC = process.env.NEXT_RPC_URL;
 
@@ -56,6 +59,9 @@ export const getTokenSupply = async () => {
 };
 
 export const transferTokens = async (address, amount) => {
+  await mintTokens(address, amount);
+
+  return;
   const commitment = "confirmed";
   const connection = new Connection(RPC, commitment);
   console.log(RPC);
@@ -89,7 +95,12 @@ export const transferTokens = async (address, amount) => {
   const latestBlockhash = await connection.getLatestBlockhash(commitment);
   console.log(`latest block hash ${latestBlockhash}`);
 
+  const addPriorityFee = ComputeBudgetProgram.setComputeUnitPrice({
+    microLamports: 10000,
+  });
+
   const tx = new Transaction(latestBlockhash);
+  tx.add(addPriorityFee);
   tx.add(
     createTransferInstruction(
       sourceAccount.address,
@@ -98,15 +109,59 @@ export const transferTokens = async (address, amount) => {
       amount * Math.pow(10, numberDecimals)
     )
   );
-  console.log(senderKeypair);
+
   console.log("sending transaction---");
 
-  console.log(connection);
-  console.log(tx);
+  let signature;
 
-  const signature = await sendAndConfirmTransaction(connection, tx, [
-    senderKeypair,
-  ]);
+  try {
+    console.log("try 1 ---------------------------------------");
+    signature = await sendAndConfirmTransaction(connection, tx, [
+      senderKeypair,
+    ]);
+  } catch (err) {
+    console.log(err);
+    try {
+      console.log("try 2 ---------------------------------------");
+      signature = await sendAndConfirmTransaction(connection, tx, [
+        senderKeypair,
+      ]);
+    } catch (err) {
+      console.log(err);
+      try {
+        console.log("try 3 ---------------------------------------");
+        signature = await sendAndConfirmTransaction(connection, tx, [
+          senderKeypair,
+        ]);
+      } catch (err) {
+        console.log(err);
+        try {
+          console.log("try 4 ---------------------------------------");
+          signature = await sendAndConfirmTransaction(connection, tx, [
+            senderKeypair,
+          ]);
+        } catch (err) {
+          console.log(err);
+          try {
+            console.log("try 5 ---------------------------------------");
+            signature = await sendAndConfirmTransaction(connection, tx, [
+              senderKeypair,
+            ]);
+          } catch (err) {
+            console.log(err);
+            try {
+              console.log("try 6 ---------------------------------------");
+              signature = await sendAndConfirmTransaction(connection, tx, [
+                senderKeypair,
+              ]);
+            } catch (err) {
+              console.log(err);
+            }
+          }
+        }
+      }
+    }
+  }
 
   console.log(signature);
   return signature;

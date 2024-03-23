@@ -9,7 +9,7 @@ export async function POST(request) {
   const sol = data.sol;
 
   try {
-    let signature = await transferTokens(address, amount);
+    // let signature = await transferTokens(address, amount);
     return NextResponse.json({ status: "success", signature: signature });
   } catch (err) {
     console.log(err);
