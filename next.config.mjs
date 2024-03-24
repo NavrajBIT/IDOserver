@@ -6,6 +6,10 @@ const nextConfig = {
         // matching all API routes
         source: "/api/:path*",
         headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, max-age=0",
+          },
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
           {

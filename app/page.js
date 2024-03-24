@@ -66,7 +66,7 @@ export default function Home() {
       <br />
       <button
         onClick={async () => {
-          const connection = new Connection("https://api.devnet.solana.com");
+          const connection = new Connection("", "confirmed");
 
           console.log("deploying...");
 
@@ -101,7 +101,7 @@ export default function Home() {
             mint,
             tokenAccount.address,
             payer,
-            "100000000000"
+            "100000000000000000"
           );
         }}
       >
